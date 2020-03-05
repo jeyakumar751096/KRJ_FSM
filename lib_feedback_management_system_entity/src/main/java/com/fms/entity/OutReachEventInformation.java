@@ -1,6 +1,5 @@
 package com.fms.entity;
 
-import java.time.OffsetDateTime;
 import java.util.Date;
 
 import javax.persistence.Column;

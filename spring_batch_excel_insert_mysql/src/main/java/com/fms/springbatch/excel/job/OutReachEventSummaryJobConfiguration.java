@@ -17,10 +17,12 @@ import org.springframework.batch.item.excel.poi.PoiItemReader;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 
 import com.fms.entity.OutreachEventsSummary;
 import com.fms.springbatch.excel.mapper.OutReachEventSummaryMapperImpl;
+import com.fms.springbatch.excel.util.FileMoved;
 
 
 //@EnableBatchProcessing
@@ -66,13 +68,19 @@ public class OutReachEventSummaryJobConfiguration {
 		  .writer(iWriter)
 		  .build();
 		  
-		  //Step stepMove=stepBuilderFactory.get("file-renamed-moved").tasklet(getFileRenameAndMoveTasket()).build();
+		  Step stepMove=stepBuilderFactory.get("file-renamed-moved").tasklet(getFileRenameAndMoveSummaryTasket()).build();
 	  
 		 return jobBuilderFactory.get("etl-summary") 
 				 .incrementer(new RunIdIncrementer())
 				 .start(step)
-				 //.next(stepMove)
+				 .next(stepMove)
 				 .build();
 	 }
+	
+	@Bean
+	public FileMoved getFileRenameAndMoveSummaryTasket() {
+		return new FileMoved(new FileSystemResource("D:\\Users\\751096\\excel\\OutReachEventSummary.xlsx"),new FileSystemResource("D:\\Users\\751096\\excel\\EXCEL_DONE"));
+	}
+ 
 
 }

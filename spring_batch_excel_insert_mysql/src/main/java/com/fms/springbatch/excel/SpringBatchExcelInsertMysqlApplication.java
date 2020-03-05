@@ -38,7 +38,7 @@ import com.fms.springbatch.excel.util.FileMoved;
 @SpringBootApplication
 @EnableBatchProcessing
 @Configuration
-@ComponentScan("com.fms.springbatch.excel,com.fms.entity")
+@ComponentScan("com.fms.springbatch.excel.*,com.fms.entity")
 public class SpringBatchExcelInsertMysqlApplication {
 
 	
@@ -99,7 +99,7 @@ public class SpringBatchExcelInsertMysqlApplication {
 	  
 	  @Bean
 		public FileMoved getFileRenameAndMoveTasket() {
-			return new FileMoved(new FileSystemResource("D:\\Users\\751096\\excel\\Book1.xlsx"),new FileSystemResource("D:\\Users\\751096\\excel\\OLD\\Book1.xlsx"));
+			return new FileMoved(new FileSystemResource("D:\\Users\\751096\\excel\\Book1.xlsx"),new FileSystemResource("D:\\Users\\751096\\excel\\EXCEL_DONE"));
 		}
 	 
 	
