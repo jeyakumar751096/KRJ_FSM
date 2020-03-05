@@ -1,0 +1,31 @@
+package com.fms.entity;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+
+import lombok.Data;
+@Entity
+@Table(name ="PaticipantFeedBack")
+@Data
+public class PaticipantFeedBack {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="PaticipantFeedBackID")
+	private Integer paticipantFeedBackID;
+	
+	@Column(name="EmployeeID")
+	private Integer employeeID;
+	
+	@Column(name="EventID")
+	private String eventID;
+	
+	@Column(name="Rating")
+	private Integer rating;
+
+}
