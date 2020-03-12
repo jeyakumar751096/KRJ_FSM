@@ -9,32 +9,49 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.fms.springsecurity.login.entity.LoginUserDetails;
 import com.fms.springsecurity.login.entity.User;
 
 @RestController
+@RequestMapping("/")
 public class LoginController {
 	
 	private static final Logger log = LoggerFactory.getLogger(LoginController.class);
-
+	
+	 ModelAndView modelView = new ModelAndView();
 	
 	@GetMapping(value = "/login")
-	public String login() {
-		return "login";
+	public ModelAndView login() {
+		//ModelAndView modelView = new ModelAndView();
+		modelView.setViewName("login");
+		return modelView;
 	}
 	
 	@GetMapping(value = "/loginFailed")
-	public String loginError(Model model) {
+	public ModelAndView loginError(Model model) {
 		log.info("login attempt failed");
+		//ModelAndView modelView = new ModelAndView();
 		model.addAttribute("error", "true");
-		return "login";
+		modelView.setViewName("login");
+		return modelView;
 	}
 	
+	@GetMapping(value = "/logout")
+    public ModelAndView logout(SessionStatus session) {
+        SecurityContextHolder.getContext().setAuthentication(null);
+        session.setComplete();
+        //return "redirect:/welcome";
+        modelView.setViewName("logout");
+		return modelView;
+    }
 	
 	@PostMapping(value = "/postLogin")
-	public String postLogin(Model model, HttpSession session) {
+	public ModelAndView postLogin(Model model, HttpSession session) {
         log.info("postLogin()");
         // read principal out of security context and set it to session
         UsernamePasswordAuthenticationToken authentication = (UsernamePasswordAuthenticationToken) 
@@ -44,7 +61,12 @@ public class LoginController {
         model.addAttribute("currentUser", loggedInUser.getUserName());
         log.info("******loggedInUser.getUserName()********"+loggedInUser.getUserName());
         session.setAttribute("userId", loggedInUser.getUserId());
-        return "redirect:/login";
+        // return "redirect:/welcome";
+        //ModelAndView modelView = new ModelAndView();
+        modelView.setViewName("welcome");
+        return modelView;
+        
+      
     }
 	
     private void validatePrinciple(Object principal) {
