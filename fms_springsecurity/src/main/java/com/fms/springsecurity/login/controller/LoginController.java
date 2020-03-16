@@ -1,5 +1,10 @@
 package com.fms.springsecurity.login.controller;
 
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -14,8 +19,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fms.springsecurity.login.entity.Authority;
 import com.fms.springsecurity.login.entity.LoginUserDetails;
 import com.fms.springsecurity.login.entity.User;
+import com.fms.springsecurity.login.enumtype.AuthorityType;
 
 @RestController
 @RequestMapping("/")
@@ -35,7 +42,7 @@ public class LoginController {
 	@GetMapping(value = "/loginFailed")
 	public ModelAndView loginError(Model model) {
 		log.info("login attempt failed");
-		//ModelAndView modelView = new ModelAndView();
+		ModelAndView modelView = new ModelAndView();
 		model.addAttribute("error", "true");
 		modelView.setViewName("login");
 		return modelView;
@@ -46,7 +53,7 @@ public class LoginController {
         SecurityContextHolder.getContext().setAuthentication(null);
         session.setComplete();
         //return "redirect:/welcome";
-        modelView.setViewName("logout");
+        modelView.setViewName("login");
 		return modelView;
     }
 	
@@ -59,6 +66,13 @@ public class LoginController {
         validatePrinciple(authentication.getPrincipal());
         User loggedInUser = ((LoginUserDetails) authentication.getPrincipal()).getUserDetails();
         model.addAttribute("currentUser", loggedInUser.getUserName());
+        
+       List<AuthorityType> roles = loggedInUser.getAuthorities().stream().map(r->r.getAuthorityName()).collect(Collectors.toList());
+        /*
+         * Set<String> roles = authentication.getAuthorities().stream()
+     .map(r -> r.getAuthority()).collect(Collectors.toSet());
+         */
+        model.addAttribute("currentRole", roles.get(0));
         log.info("******loggedInUser.getUserName()********"+loggedInUser.getUserName());
         session.setAttribute("userId", loggedInUser.getUserId());
         // return "redirect:/welcome";
@@ -68,6 +82,13 @@ public class LoginController {
         
       
     }
+	
+	@GetMapping(value="/access-denied")
+	public ModelAndView deniedPage() {
+		ModelAndView modelView=new ModelAndView();
+		modelView.setViewName("access-denied");
+		return modelView;
+	}
 	
     private void validatePrinciple(Object principal) {
         if (!(principal instanceof LoginUserDetails)) {

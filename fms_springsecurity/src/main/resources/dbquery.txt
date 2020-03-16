@@ -1,0 +1,37 @@
+User
+=====
+CREATE TABLE Users( userId INT NOT NULL AUTO_INCREMENT, 
+username VARCHAR(100) NOT NULL,
+ password VARCHAR(100) NOT NULL,
+dateCreated DATE NOT NULL,
+authorityId int,
+PRIMARY KEY(userId),
+CONSTRAINT FK_Authority FOREIGN KEY (authorityId)
+    REFERENCES Authority(authorityId));
+
+Authority
+==========
+CREATE TABLE Authority(
+authorityId INT NOT NULL AUTO_INCREMENT, 
+authorityName VARCHAR(100) NOT NULL,
+PRIMARY KEY(authorityId));
+
+user_authority
+================
+CREATE TABLE user_authority(
+authorityId INT,
+userId INT);
+
+	
+INSERT INTO authority(`authorityId`,`authorityName`) VALUES (1,'ROLE_ADMIN');
+INSERT INTO authority(`authorityId`,`authorityName`) VALUES (2,'ROLE_PMO');
+INSERT INTO authority(`authorityId`,`authorityName`) VALUES (3,'ROLE_POC');
+
+
+INSERT INTO `user_authority`(`authorityId`, `userId`) VALUES (1, 1);
+INSERT INTO `user_authority`(`authorityId`, `userId`) VALUES (2, 2);
+INSERT INTO `user_authority`(`authorityId`, `userId`) VALUES (3, 3);
+
+INSERT INTO `users` (`userId`, `username`, `password`, `dateCreated`) VALUES (1,'krj','$2a$04$i9dXsyF8hW2OWJshDRc0d.MKmpEK6SviWdVB/RMskbJgYKOjW.VXq','2015-11-15 22:14:54');
+INSERT INTO `users` (`userId`, `username`, `password`, `dateCreated`) VALUES (2,'kumar','$2a$04$i9dXsyF8hW2OWJshDRc0d.MKmpEK6SviWdVB/RMskbJgYKOjW.VXq','2015-10-15 22:14:54');
+INSERT INTO `users` (`userId`, `username`, `password`, `dateCreated`) VALUES (3,'shiva','$2a$04$i9dXsyF8hW2OWJshDRc0d.MKmpEK6SviWdVB/RMskbJgYKOjW.VXq','2015-10-15 22:14:54');

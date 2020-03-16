@@ -3,7 +3,7 @@
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<!DOCTYPE html>
+<!DOCTYPE head PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
@@ -11,7 +11,7 @@
 <body>
 <div>
     <div class="panel-body">
-        <form action="${pageContext.request.contextPath}/doLogin" method="post">
+        <form action="/doLogin" method="post">
             <fieldset>
                 <legend>Please sign in</legend>
 

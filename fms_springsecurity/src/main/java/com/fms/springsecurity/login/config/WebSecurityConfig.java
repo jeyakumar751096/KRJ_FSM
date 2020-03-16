@@ -42,31 +42,24 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		auth.authenticationProvider(authenticationProvider());
 	}
 	
-	/*http
-    .authorizeRequests().antMatchers("/wallPage").hasAnyRole("ADMIN", "USER")
-    .and()
-    .authorizeRequests().antMatchers("/login", "/resource/**").permitAll()
-    .and()
-.formLogin().loginPage("/login").usernameParameter("username").passwordParameter("password").permitAll()
-    .loginProcessingUrl("/doLogin")
-    .successForwardUrl("/postLogin")
-    .failureUrl("/loginFailed")
-    .and()
-    .logout().logoutUrl("/doLogout").logoutSuccessUrl("/logout").permitAll()
-    .and()
-    .csrf().disable();*/
+
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-		.antMatchers("/welcome").hasAnyRole("ADMIN","PMO","POC")
+		.antMatchers("/welcome").hasRole("ADMIN")
+		.antMatchers("/admin").hasRole("ADMIN")
+		.antMatchers("/pmo").hasRole("PMO")
+		.antMatchers("/poc").hasRole("POC")
 		
 		.antMatchers("/login", "/resource/**").permitAll()
 		.and()
+		.exceptionHandling().accessDeniedPage("/access-denied")
+        .and()
 		.formLogin().loginPage("/login").usernameParameter("username").passwordParameter("password").permitAll()
 		.loginProcessingUrl("/doLogin")
 		.successForwardUrl("/postLogin")
-		.failureForwardUrl("/loginFailed")
+		.failureUrl("/loginFailed")
 		.and()
 		.logout().logoutUrl("/doLogout").logoutSuccessUrl("/logout").permitAll()
         .and()
