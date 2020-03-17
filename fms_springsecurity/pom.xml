@@ -49,6 +49,20 @@
 	   		 <groupId>org.springframework.boot</groupId>
 		    <artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
+		
+		<dependency>
+			<groupId>com.fms.entity</groupId>
+			<artifactId>lib_feedback_management_system_entity</artifactId>
+			<version>0.0.3</version>
+			<scope>provided</scope>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.openrdf.sesame</groupId>
+		    <artifactId>sesame-rio-api</artifactId>
+		    <version>2.7.2</version>
+		</dependency>
+				
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -88,6 +102,8 @@
 			<artifactId>javax.servlet.jsp-api</artifactId>
 			<version>2.3.1</version>
 		</dependency>
+		
+		
 
 		<dependency>
 			<groupId>javax.servlet</groupId>
