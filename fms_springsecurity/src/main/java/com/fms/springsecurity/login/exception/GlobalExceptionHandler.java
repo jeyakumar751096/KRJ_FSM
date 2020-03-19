@@ -7,8 +7,14 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 //@ControllerAdvice
-public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
+public class GlobalExceptionHandler extends Exception {
 	
+private static final long serialVersionUID = 1L;
+	
+	public GlobalExceptionHandler(String message) {
+		super(message);
+	}
+/*	
 	//@ExceptionHandler(ApiException.class)
 	public ResponseEntity<ErrorResponse> handleDataException(ApiException exception) {
 	    final ErrorResponse errorResponse = new ErrorResponse(400, exception.getMessage());
@@ -20,4 +26,6 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 		final ErrorResponse errorResponse = new ErrorResponse(exception.getCode(), exception.getMessage());
 		return new ResponseEntity<>(errorResponse, HttpStatus.valueOf(exception.getCode()));
 	}
+	*/
+
 }

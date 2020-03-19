@@ -21,6 +21,10 @@ public class OutReachEventInformationService {
 		
 	}
 	
+	public Integer toltalLivesImpact() {
+		return outReachEventInformationRepository.toltalLivesImpact();
+	}
+	
 	
 
 }

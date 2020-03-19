@@ -27,9 +27,5 @@ public class AdminController {
 		return modelView;
 	}
 	
-	@GetMapping(value="/admin/loadAll")
-	public ResponseEntity <List<OutReachEventInformation>> loadAllOutReachEventInformation( ) {
-		List<OutReachEventInformation>  outReachEventInformation = outReachEventInformationService.loadAllOutReachEventInformation();
-		return new ResponseEntity<List<OutReachEventInformation>>(outReachEventInformation,HttpStatus.OK);
-	}
+	
 }

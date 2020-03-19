@@ -11,9 +11,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 class FmsSpringsecurityApplicationTests {
 
 	
-	 /* @Test
+	  @Test
 	 
 	  @Ignore 
 	 void contextLoads() { }
-	*/
+	
 }
