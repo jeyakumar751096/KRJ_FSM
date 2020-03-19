@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.Data;
 
 @Entity
@@ -40,6 +42,7 @@ public class OutReachEventInformation {
 	private String eventDescription;
 	
 	@Column(name = "EventDate")
+	@JsonFormat(pattern ="dd-MM-yy")
 	private Date eventDate;
 	
 	@Column(name = "EmployeeID")

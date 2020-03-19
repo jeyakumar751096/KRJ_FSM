@@ -6,6 +6,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.Data;
 
 @Data
@@ -46,6 +48,7 @@ public class OutreachEventsSummary {
 	private String eventDescription;
 	
 	@Column(name = "EventDate")
+	@JsonFormat(pattern ="dd-MM-yy")
 	private Date eventDate;	
 	
 	@Column(name = "Totalnoofvolunteers")
